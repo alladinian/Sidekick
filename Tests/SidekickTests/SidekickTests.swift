@@ -2,14 +2,19 @@ import XCTest
 @testable import Sidekick
 
 final class SidekickTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(Sidekick().text, "Hello, World!")
+
+    func testCastMap() {
+        let list: [Any] = [1, "a", 3.14, "b", Date()]
+        XCTAssertEqual(list.castMap(String.self), list.compactMap({ $0 as? String }))
+    }
+
+    func testCompacted() {
+        let list: [String?] = ["a", nil, "b", nil]
+        XCTAssertEqual(list.compacted(), list.compactMap({ $0 }))
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testCastMap", testCastMap),
+        ("testCompacted", testCompacted),
     ]
 }
