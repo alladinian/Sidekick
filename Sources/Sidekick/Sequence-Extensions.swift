@@ -19,6 +19,12 @@ public extension Sequence {
 public extension Sequence where Element: OptionalConvertible {
     /// Simplification for `objects.compactMap { $0 }`
     func compacted() -> [Element.Wrapped] {
-        return compactMap { $0.asOptional() }
+        compactMap { $0.asOptional() }
+    }
+}
+
+public extension Sequence where Element == URLQueryItem {
+    func valueFor(_ name: String) -> String? {
+        first(where: { $0.name == name })?.value
     }
 }
