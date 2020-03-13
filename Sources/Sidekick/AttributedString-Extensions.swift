@@ -9,15 +9,15 @@ import Foundation
 
 #if canImport(UIKit)
 import UIKit
-typealias Font  = UIFont
-typealias Color = UIColor
+public typealias Font  = UIFont
+public typealias Color = UIColor
 #elseif canImport(AppKit)
 import AppKit
-typealias Font  = NSFont
-typealias Color = NSColor
+public typealias Font  = NSFont
+public typealias Color = NSColor
 #endif
 
-extension String {
+public extension String {
 
     func regular(size: CGFloat = Font.systemFontSize) -> NSAttributedString {
         NSAttributedString(string: self, attributes: [.font: Font.systemFont(ofSize: size)])
@@ -37,7 +37,7 @@ extension String {
 
 }
 
-extension NSAttributedString {
+public extension NSAttributedString {
     /// Returns a colored attributed string
     func colored(color: Color) -> NSMutableAttributedString {
         let string = NSMutableAttributedString(attributedString: self)

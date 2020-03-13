@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Sequence {
+public extension Sequence {
     /// Simplification for `objects.compactMap { $0 as? CastType }`
     /// - Parameter type: The target cast Type
     /// - Returns: A list of objects that could be casted
@@ -16,7 +16,7 @@ extension Sequence {
     }
 }
 
-extension Sequence where Element: OptionalConvertible {
+public extension Sequence where Element: OptionalConvertible {
     /// Simplification for `objects.compactMap { $0 }`
     func compacted() -> [Element.Wrapped] {
         return compactMap { $0.asOptional() }

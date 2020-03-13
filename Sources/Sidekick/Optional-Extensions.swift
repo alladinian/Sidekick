@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol OptionalConvertible {
+public protocol OptionalConvertible {
     associatedtype Wrapped
     func asOptional() -> Wrapped?
 }
 
 extension Optional: OptionalConvertible {
-    func asOptional() -> Wrapped? {
+    public func asOptional() -> Wrapped? {
         return self
     }
 }
