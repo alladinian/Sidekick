@@ -8,37 +8,37 @@
 import Foundation
 import CoreData
 
-func &&(left: NSPredicate?, right: NSPredicate?) -> NSCompoundPredicate {
+public func && (left: NSPredicate?, right: NSPredicate?) -> NSCompoundPredicate {
     NSCompoundPredicate(andPredicateWithSubpredicates: [left, right].compactMap({$0}))
 }
 
-func ||(left: NSPredicate, right: NSPredicate) -> NSCompoundPredicate {
+public func || (left: NSPredicate, right: NSPredicate) -> NSCompoundPredicate {
     NSCompoundPredicate(orPredicateWithSubpredicates: [left, right])
 }
 
-func ==(left: String, flag: Bool) -> NSPredicate {
+public func == (left: String, flag: Bool) -> NSPredicate {
     NSPredicate(format: "%K == %@", left, NSNumber(booleanLiteral: flag))
 }
 
-func ==(left: String, object: NSObject) -> NSPredicate {
+public func == (left: String, object: NSObject) -> NSPredicate {
     NSPredicate(format: "%K == %@", left, object)
 }
 
-func ~=(left: String, right: NSObject) -> NSPredicate {
+public func ~= (left: String, right: NSObject) -> NSPredicate {
     NSPredicate(format: "ANY %K == %@", left, right)
 }
 
-func ===(left: NSManagedObject, right: String) -> NSPredicate {
+public func === (left: NSManagedObject, right: String) -> NSPredicate {
     NSPredicate(format: "%@ IN %K", left, right)
 }
 
-extension NSManagedObject {
+public extension NSManagedObject {
     func `in`(_ collectionPath: String) -> NSPredicate {
         NSPredicate(format: "%@ IN %K", self, collectionPath)
     }
 }
 
-extension String {
+public extension String {
     func anyIs(_ object: NSObject) -> NSPredicate {
         NSPredicate(format: "ANY %K == %@", self, object)
     }
@@ -60,7 +60,7 @@ extension String {
     }
 }
 
-extension Array where Element == NSPredicate {
+public extension Array where Element == NSPredicate {
     var orJoined: NSCompoundPredicate {
         NSCompoundPredicate(orPredicateWithSubpredicates: self)
     }
