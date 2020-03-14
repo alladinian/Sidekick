@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 public func && (left: NSPredicate?, right: NSPredicate?) -> NSCompoundPredicate {
-    NSCompoundPredicate(andPredicateWithSubpredicates: [left, right].compactMap({$0}))
+    NSCompoundPredicate(andPredicateWithSubpredicates: [left, right].compacted())
 }
 
 public func || (left: NSPredicate, right: NSPredicate) -> NSCompoundPredicate {

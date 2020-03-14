@@ -9,7 +9,7 @@ import XCTest
 @testable import Sidekick
 
 @objcMembers
-fileprivate class Model: NSObject {
+class Model: NSObject {
     let name: String
     let age: Int
 
@@ -22,10 +22,12 @@ fileprivate class Model: NSObject {
 
 final class PredicateTests: XCTestCase {
 
-    let models: NSArray = [
-        Model(name: "Bob", age: 20),
-        Model(name: "Alice", age: 23),
-        Model(name: "Steve", age: 57)
+    let bob   = Model(name: "Bob", age: 20)
+    let alice = Model(name: "Alice", age: 23)
+    let steve = Model(name: "Steve", age: 57)
+
+    lazy var models: NSArray = [
+        bob, alice, steve
     ]
 
     func testCompoundAnd() {
@@ -33,8 +35,15 @@ final class PredicateTests: XCTestCase {
         let b = NSPredicate(format: "age == %d", 23)
         let comp = a && b
         let result = models.filtered(using: comp) as? [Model]
-        XCTAssertNotNil(result?.first)
-        XCTAssertEqual(result?.first, (models as? [Model])?[1])
+        XCTAssertEqual(result, [alice])
+    }
+
+    func testTypedCompoundAnd() {
+        let a = \Model.name == "Alice"
+        let b = \Model.age == 23
+        let comp = a && b
+        let result = models.filtered(using: comp) as? [Model]
+        XCTAssertEqual(result, [alice])
     }
 
     static var allTests = [
