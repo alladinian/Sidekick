@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Sidekick
 import SwiftUI
 
 //class ElementMeasurementFormatter: MeasurementFormatter {
@@ -44,15 +45,20 @@ struct Formatters {
 
 }
 
-struct ComboSlider: View {
+public struct ComboSlider: View {
 
-    var inactiveColor: NSColor     = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.2470588235)
-    var name: String               = ""
-    var range                      = 0.0...1.0
+    public var inactiveColor: NSColor     = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.2470588235)
+    public var name: String               = ""
+    public var range                      = 0.0...1.0
 
-    var undoManager: UndoManager?
+    var undoManager: UndoManager? = nil
 
-    @Binding var value: CGFloat {
+    public init(name: String, value: Binding<CGFloat>) {
+        self.name = name
+        self._value = value
+    }
+
+    @Binding public var value: CGFloat {
         willSet {
             // Undo registration?
 //            let (old, new) = (self.value, newValue)
@@ -67,7 +73,7 @@ struct ComboSlider: View {
         }
     }
 
-    var unit: Unit?
+    var unit: Unit? = nil
 
     @State private var isActive = true
     @State private var isEditing = false
@@ -94,7 +100,7 @@ struct ComboSlider: View {
 
     let lineHeight: CGFloat = 1
 
-    var body: some View {
+    public var body: some View {
         ZStack(alignment: .leading) {
 
             // Filltrack
