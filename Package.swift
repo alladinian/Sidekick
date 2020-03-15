@@ -16,6 +16,9 @@ let package = Package(
         .library(
             name: "Sidekick",
             targets: ["Sidekick"]),
+        .library(
+            name: "Sidekick-SwiftUI",
+            targets: ["Sidekick-SwiftUI"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -27,6 +30,9 @@ let package = Package(
         .target(
             name: "Sidekick",
             dependencies: []),
+        .target(
+            name: "Sidekick-SwiftUI",
+            dependencies: ["Sidekick"]),
         .testTarget(
             name: "SidekickTests",
             dependencies: ["Sidekick"]),
